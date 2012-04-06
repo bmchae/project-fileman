@@ -1,2 +1,2 @@
 #python src/main/python/fileman.py
-cat data/test.txt | groovy src/main/groovy/fileman.groovy
+head -5 data/test.txt | groovy src/main/groovy/fileman.groovy

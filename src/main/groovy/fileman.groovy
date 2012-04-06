@@ -29,17 +29,17 @@ System.in.eachLine { line ->
     if (m) {
         def names = fieldDefs.keySet() as List
         def values = m[0][1..-1].collect { it.trim() }
-        rows << [names, values].transpose().collectEntries{it}
+        row = [names, values].transpose().collectEntries{it} 
+
+		println '~' * 80
+		println line
+		println row
+		row.each { k, v ->
+            if (!(k =~ /^ *$/))
+                printf "%10s : %s\n", k, v
+        }
     } else {
         println 'not match : ' + line
-    }
-}
-
-rows.each { row ->
-    println '~' * 80
-    row.each { k, v ->
-        if (!(k =~ /^ *$/))
-            printf "%10s : %s\n", k, v
     }
 }
 
