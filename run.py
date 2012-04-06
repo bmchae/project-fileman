@@ -5,17 +5,17 @@ import struct
 
 filename = 'data/test.txt'
 
-#sep = { 
-#4:'empno', 
-#2:'sal', 
-#2:'deptno'
-#}
+sep = { 
+4:'empno', 
+3:'sal', 
+2:'deptno'
+}
 
-sep = (4,3,2)
+#sep = (4,3,2)
 
 
-#fmt = ''.join('%ds' % w for w in sep.iterkeys()) 
-fmt = ''.join('%ds' % w for w in sep) 
+fmt = ''.join('%ds' % w for w in sep.iterkeys()) 
+#fmt = ''.join('%ds' % w for w in sep) 
 parse = struct.Struct(fmt).unpack_from
 
 print 'fmt:{!r}'.format(fmt)

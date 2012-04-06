@@ -4,15 +4,22 @@
  * Usage : cat data/test.txt | groovy run.groovy
  */
 
-def filename = 'data/test.txt'
-
+/**
+ * configuration
+ */
 def fieldDefs = [
 empno  : 4, 
-sal    : 3, 
+''     : 3, 
 deptno : 2
 ]
 
 
+//def filename = 'data/test.txt'
+
+
+/**
+ * program
+ */
 def pattern = "^" + fieldDefs.collect { k, v -> "(.{$v})" }.join('') + "\$"
 
 rows = []
@@ -23,13 +30,16 @@ System.in.eachLine { line ->
         def names = fieldDefs.keySet() as List
         def values = m[0][1..-1].collect { it.trim() }
         rows << [names, values].transpose().collectEntries{it}
+    } else {
+        println 'not match : ' + line
     }
 }
 
 rows.each { row ->
     println '~' * 80
     row.each { k, v ->
-        printf "%10s : %s\n", k, v
+        if (!(k =~ /^ *$/))
+            printf "%10s : %s\n", k, v
     }
 }
 
