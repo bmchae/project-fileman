@@ -31,10 +31,10 @@ System.in.eachLine { line ->
         def values = m[0][1..-1].collect { it.trim() }
         row = [names, values].transpose().collectEntries{it} 
 
-		println '~' * 80
-		println line
-		println row
-		row.each { k, v ->
+        println '~' * 80
+        println line
+        println row
+        row.each { k, v ->
             if (!(k =~ /^ *$/))
                 printf "%10s : %s\n", k, v
         }
