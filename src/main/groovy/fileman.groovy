@@ -3,11 +3,12 @@
 /**
  * Usage : cat data/test.txt | groovy run.groovy
  */
+evaluate(new File("layout.groovy"))
 
 /**
  * configuration
  */
-def fieldDefs = [
+def layout = [
 empno  : 4, 
 ''     : 3, 
 deptno : 2
@@ -20,14 +21,14 @@ deptno : 2
 /**
  * program
  */
-def pattern = "^" + fieldDefs.collect { k, v -> "(.{$v})" }.join('') + "\$"
+def pattern = "^" + layout.collect { k, v -> "(.{$v})" }.join('') + "\$"
 
 rows = []
 //new File(filename).eachLine { line ->
 System.in.eachLine { line ->
     def m = line =~ pattern
     if (m) {
-        def names = fieldDefs.keySet() as List
+        def names = layout.keySet() as List
         def values = m[0][1..-1].collect { it.trim() }
         row = [names, values].transpose().collectEntries{it} 
 
